@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Market Gap Analysis</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f0f0f0; padding: 20px; }
+    .card {
+      background: white;
+      border-radius: 12px;
+      padding: 20px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      max-width: 600px;
+      margin: 40px auto;
+    }
+    h2 { color: #333; }
+    .section { margin-bottom: 15px; }
+    .verdict {
+      font-weight: bold;
+      font-size: 1.2em;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h2>📊 Market Gap Analysis</h2>
+    <div class="section" id="sgx">1️⃣ SGX Nifty: Loading...</div>
+    <div class="section" id="us">2️⃣ US Markets: Loading...</div>
+    <div class="section" id="asia">3️⃣ Asian Markets: Loading...</div>
+    <div class="section" id="fii">4️⃣ FII/DII Activity: Loading...</div>
+    <div class="section" id="nifty">5️⃣ Nifty Technical Level: Loading...</div>
+    <div class="section verdict" id="verdict">🔍 Analyzing...</div>
+  </div>
+
+  <script>
+    async function fetchData() {
+      try {
+        const sgx = 'Flat to Slightly Down';
+        const us = 'Dow +0.8%, Nasdaq +1.1%';
+        const asia = 'Nikkei -0.7%, Hang Seng -0.4%';
+        const fii = '₹-4636 Cr ➜ Selling';
+        const nifty = 'Near Support: 24,800';
+
+        document.getElementById('sgx').innerText = `1️⃣ SGX Nifty: ${sgx}`;
+        document.getElementById('us').innerText = `2️⃣ US Markets: ${us}`;
+        document.getElementById('asia').innerText = `3️⃣ Asian Markets: ${asia}`;
+        document.getElementById('fii').innerText = `4️⃣ FII/DII Activity: ${fii}`;
+        document.getElementById('nifty').innerText = `5️⃣ Nifty Technical Level: ${nifty}`;
+
+        let verdictText = '🔔 Likely to open ' + (sgx.includes('Down') || fii.includes('Selling') ? 'Gap Down' : 'Gap Up');
+        document.getElementById('verdict').innerText = verdictText;
+      } catch (error) {
+        console.error('Data fetch failed:', error);
+        document.getElementById('verdict').innerText = '❌ Failed to fetch live data.';
+      }
+    }
+
+    // Auto-fetch when page loads
+    window.onload = fetchData;
+  </script>
+</body>
+</html>
